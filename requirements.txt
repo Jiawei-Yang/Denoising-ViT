@@ -1,0 +1,32 @@
+# from dinov2: https://github.com/facebookresearch/dinov2/blob/main/requirements.txt
+--extra-index-url https://download.pytorch.org/whl/cu117
+torch==2.0.0
+torchvision==0.15.0
+omegaconf
+torchmetrics==0.10.3
+fvcore
+iopath
+xformers==0.0.18
+submitit
+--extra-index-url https://pypi.nvidia.com
+cuml-cu11
+
+# dev
+black==22.6.0
+ipdb
+
+# custom
+tensorboard
+wandb
+matplotlib
+imageio
+imageio[ffmpeg]
+lpips
+timm==0.9.10
+opencv-python
+scikit-image
+mmcv-full==1.5.0
+mmsegmentation==0.27.0
+
+# clustering
+torch_kmeans
