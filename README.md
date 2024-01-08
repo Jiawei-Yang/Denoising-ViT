@@ -6,7 +6,7 @@ This is the official code release for
 
 by [Jiawei Yang](https://jiawei-yang.github.io/)&dagger;\*, [Katie Z Luo](https://www.cs.cornell.edu/~katieluo/)\*, [Jiefeng Li](https://jeffli.site/), [Kilian Q. Weinberger](https://www.cs.cornell.edu/~kilian/), [Yonglong Tian](https://people.csail.mit.edu/yonglong/), and [Yue Wang](https://yuewang.xyz/)
 
-[Paper](https://jiawei-yang.github.io/DenoisingViT/resources/paper.pdf) | [Project Page](https://jiawei-yang.github.io/DenoisingViT/)
+[Paper](https://jiawei-yang.github.io/DenoisingViT/resources/paper.pdf) | [Arxiv](https://arxiv.org/pdf/2401.02957.pdf) | [Project Page](https://jiawei-yang.github.io/DenoisingViT/)
 
 \* equal technical contribution &dagger; project lead
 
@@ -23,7 +23,7 @@ We identify crucial artifacts in ViTs caused by positional embeddings and propos
 @article{yang2024denoising,
   author = {Jiawei Yang and Katie Z Luo and Jiefeng Li and Kilian Q Weinberger and Yonglong Tian and Yue Wang},
   title = {Denoising Vision Transformers},
-  journal = {arXiv preprint arXiv:TBD},
+  journal = {arXiv preprint arXiv:2401.02957},
   year = {2024},
 }
 ```
