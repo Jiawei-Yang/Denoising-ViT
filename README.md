@@ -1,5 +1,9 @@
 # DVT: Denoising Vision Transformers
 
+
+2024-01-19: We will release all of our *stronger* denoiser checkpoints within two weeks.
+
+------
 This is the official code release for
 
 [**Denoising Vision Transformers**](https://jiawei-yang.github.io/DenoisingViT/resources/paper.pdf).
