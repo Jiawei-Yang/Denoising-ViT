@@ -1,7 +1,9 @@
 # DVT: Denoising Vision Transformers
 
 
-2024-01-19: We will release all of our *stronger* denoiser checkpoints within two weeks.
+2024-01-19: We will release our denoiser checkpoints within two weeks.
+
+2024-02-05: Feel free to check out the *preliminary* checkpoints available [here](https://drive.google.com/drive/folders/1ZwNs0oaW3mU5Dym6sRTo9s4_Uwm31fHj?usp=drive_link). These checkpoints have been denoised from 10k VOC samples and evaluated in the paper. We plan to update the instructions for using these checkpoints soon. For now, please refer to the video_generation.py script for an example of their usage. Currently, we are still working on checkpoints denoised from ImageNet, which we will share later.
 
 ------
 This is the official code release for
