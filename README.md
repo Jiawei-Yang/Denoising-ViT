@@ -1,46 +1,51 @@
-# DVT: Denoising Vision Transformers
+<div align="center">
+<h1>Denoising Vision Transformers</h1>
 
+[**Jiawei Yang**](https://jiawei-yang.github.io/)<sup>1*&dagger;</sup> · [**Katie Z Luo**](https://www.cs.cornell.edu/~katieluo/)<sup>2*</sup> · [**Jiefeng Li**](https://jeffli.site/)<sup>3</sup> · [**Congyue Deng**](https://cs.stanford.edu/~congyue/)<sup>4</sup>
+<br>
+[**Leonidas Guibas**](https://geometry.stanford.edu/member/guibas/)<sup>4</sup> · [**Dilip Krishnan**](https://dilipkay.wordpress.com/)<sup>5</sup> · [**Kilian Q. Weinberger**](https://www.cs.cornell.edu/~kilian/)<sup>2</sup><br>
+[**Yonglong Tian**](https://people.csail.mit.edu/yonglong/)<sup>5</sup> · [**Yue Wang**](https://yuewang.xyz/)<sup>1</sup>
 
-2024-01-19: We will release our denoiser checkpoints within two weeks.
+<sup>1</sup>University of Southern California&emsp;&emsp;&emsp;<sup>2</sup>Cornell University
+<br>
+<sup>3</sup>Shanghai Jiaotong University&emsp;&emsp;&emsp;<sup>4</sup>Stanford University
+<br>
+<sup>5</sup>Google Research
+<br>
+&dagger;project lead&emsp;*equal technical contribution contribution
 
-2024-02-05: Feel free to check out the *preliminary* checkpoints available [here](https://drive.google.com/drive/folders/1ZwNs0oaW3mU5Dym6sRTo9s4_Uwm31fHj?usp=drive_link). These checkpoints have been denoised from 10k VOC samples and evaluated in the paper. We plan to update the instructions for using these checkpoints soon. For now, please refer to the video_generation.py script for an example of their usage. Currently, we are still working on checkpoints denoised from ImageNet, which we will share later.
+Accepted to ECCV 2024
 
-------
-This is the official code release for
+<a href="https://arxiv.org/abs/2401.02957"><img src='https://img.shields.io/badge/arXiv-DVT -red' alt='Paper PDF'></a>
+<a href='https://jiawei-yang.github.io/DenoisingViT/'><img src='https://img.shields.io/badge/Project_Page-DVT-blue' alt='Project Page'></a>
+</div>
 
-[**Denoising Vision Transformers**](https://jiawei-yang.github.io/DenoisingViT/resources/paper.pdf).
+#### TL;DR
 
-by [Jiawei Yang](https://jiawei-yang.github.io/)&dagger;\*, [Katie Z Luo](https://www.cs.cornell.edu/~katieluo/)\*, [Jiefeng Li](https://jeffli.site/), [Kilian Q. Weinberger](https://www.cs.cornell.edu/~kilian/), [Yonglong Tian](https://people.csail.mit.edu/yonglong/), and [Yue Wang](https://yuewang.xyz/)
+This work presents **Denoising Vision Transformers (DVT)**. It removes the visually annoying artifacts commonly seen in ViTs' feature maps and substaintially improves the downstream performance of dense recognition tasks.
 
-[Paper](https://jiawei-yang.github.io/DenoisingViT/resources/paper.pdf) | [Arxiv](https://arxiv.org/pdf/2401.02957.pdf) | [Project Page](https://jiawei-yang.github.io/DenoisingViT/)
-
-\* equal technical contribution &dagger; project lead
-
-![Figure](assets/teaser.png)
-
-### Abstract
-We delve into a nuanced but significant challenge inherent to Vision Transformers (ViTs): feature maps of these models exhibit grid-like artifacts, which detrimentally hurt the performance of ViTs in downstream tasks. Our investigations trace this fundamental issue down to the positional embeddings at the input stage. To address this, we propose a novel noise model, which is universally applicable to all ViTs. Specifically, the noise model dissects ViT outputs into three components: a semantics term free from noise artifacts and two artifact-related terms that are conditioned on pixel locations. Such a decomposition is achieved by enforcing cross-view feature consistency with neural fields. This per-image optimization process extracts artifact-free features from raw ViT outputs, providing clean ViT features for offline applications. Furthermore, we introduce a learnable denoiser to predict artifact-free features directly from unprocessed ViT outputs, capable of generalizing to unseen data without the need for per-image optimization. Our two-stage approach, which we term as Denoising Vision Transformers (DVT), does not require re-training existing pre-trained ViTs, and is immediately applicable to any Transformer-based architectures. We evaluate our method on a variety of representative ViTs (DINO, MAE, DeiT-III, EVA02, CLIP, DINOv2, DINOv2-reg). Extensive evaluations demonstrate that our DVT consistently and significantly improves existing state-of-the-art general-purpose models in semantic and geometric tasks across multiple datasets (e.g., +3.84 mIoU). We hope our study will encourage a re-evaluation of ViT design, especially regarding the naive use of positional embeddings.
-
-#### TL;DR:
-We identify crucial artifacts in ViTs caused by positional embeddings and propose a two-stage approach to remove these artifacts, which significantly improves the feature quality of different pre-trained ViTs.
+![teaser](assets/teaser.png)
 
 ### Citation
+
 ```
 @article{yang2024denoising,
-  author = {Jiawei Yang and Katie Z Luo and Jiefeng Li and Kilian Q Weinberger and Yonglong Tian and Yue Wang},
-  title = {Denoising Vision Transformers},
+  author = {Yang, Jiawei and Luo, Katie Z and Li, Jiefeng and Deng, Congyue and Guibas, Leonidas J. and Krishnan, Dilip and Weinberger, Kilian Q and Tian, Yonglong and Wang, Yue},
+  title = {DVT: Denoising Vision Transformers},
   journal = {arXiv preprint arXiv:2401.02957},
   year = {2024},
 }
 ```
 
+-----------------
+*This README file and codebase are legacy. We will update them soon.*
 
 ### Installation
 
 1. Create a conda environment.
 
 ```
-conda create -n dvt python=3.9 -y
+conda create -n dvt python=3.10 -y
 ```
 
 2. Activate the environment.
@@ -60,20 +65,20 @@ pip install -r requirements.txt
 ```
 pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
 ``````
+
 If you encounter the error `nvcc fatal : Unsupported gpu architecture compute_89`, try the following command:
 
-    
-``` 
+```
 TCNN_CUDA_ARCHITECTURES=86 pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
 ```
 
 If you encounter the `error: parameter packs not expanded with ‘...’`, Refer to [this solution](https://github.com/NVlabs/instant-ngp/issues/119#issuecomment-1034701258) on GitHub.
 
-
 ### Data preparation
 
 1. PASCAL-VOC 2007 and 2012:
-Please download the PASCAL VOC07 and PASCAL VOC12 datasets ([link](http://host.robots.ox.ac.uk/pascal/VOC/)) and put the data in the folder `data`, e.g., 
+Please download the PASCAL VOC07 and PASCAL VOC12 datasets ([link](http://host.robots.ox.ac.uk/pascal/VOC/)) and put the data in the folder `data`, e.g.,
+
 ```
 mkdir -p data
 cd data
@@ -81,7 +86,7 @@ wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar
 tar -xf VOCtrainval_06-Nov-2007.tar
 wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
 tar -xf VOCtrainval_11-May-2012.tar
-``` 
+```
 
 In our experiments reported in the paper, we used the first 10,000 examples from `data/voc_train.txt` for stage-1 denoising. This text file was generated by gathering all JPG images from `data/VOC2007/JPEGImages` and `data/VOC2012/JPEGImages`, excluding the validation images, and then randomly shuffling them.
 
@@ -89,14 +94,15 @@ In our experiments reported in the paper, we used the first 10,000 examples from
 Please download the [ADE20K dataset](https://groups.csail.mit.edu/vision/datasets/ADE20K/) and put the data in  `data/ADEChallengeData2016`.
 
 3. NYU-D:
-Please download the [NYU-depth dataset](PLACEHOLDER) and put the data in  `data/nyu`. Results are provided given the 2014 annotations following previous works. 
+Please download the [NYU-depth dataset](PLACEHOLDER) and put the data in  `data/nyu`. Results are provided given the 2014 annotations following previous works.
 
 4. ImageNet (Optional):
     - Download the ImageNet dataset from <http://www.image-net.org/>
     - Extract data following the instructions at [here](https://gist.github.com/BIGBALLON/8a71d225eff18d88e469e6ea9b39cef4).
     - Put the data in `data/imagenet`.
 
-### Run the code:
+### Run the code
+
 See `sample_scripts` for examples of running the code.
 
 We provide some demo outputs in demo/demo_outputs. For example, this image shows our denoising results on a cat image:
@@ -104,7 +110,6 @@ We provide some demo outputs in demo/demo_outputs. For example, this image shows
 From left to right, we show: (1) input crop, (2) raw DINOv2 base output, (3) Kmeans clustering of the raw output, (4) L2 feature norm of the raw output, (5) the similarity between the central patch and other patches in the raw output, (6) our denoised output, (7) Kmeans clustering of the denoised output, (8) L2 feature norm of the denoised output, (9) the similarity between the central patch and other patches in the denoised output, (10) the decomposed shared artifacts, (11) the L2 norm of the shared artifacts, (12) the ground-truth residual error, (13) the predicted residual term, and (13) the composition of the shared artifacts and the predicted residual term.
 
 ### Main Results and Checkpoints
-
 
 #### VOC Evaluation Results
 
@@ -125,7 +130,6 @@ From left to right, we show: (1) input crop, (2) raw DINOv2 base output, (3) Kme
 | DINOv2            | 83.60 | 96.30 | 90.82 |[log](https://jiawei-yang.github.io/DenoisingViT/logs/baselines/vit_base_patch14_dinov2.lvd142m_voc.log)|
 | DINOv2 + DVT      | 84.84 | 96.67 | 91.70 |[log](https://jiawei-yang.github.io/DenoisingViT/logs/dvt/vit_base_patch14_dinov2.lvd142m_voc.log)|
 
-
 #### ADE20K Evaluation Results
 
 |                   |  mIoU |  aAcc |  mAcc | Logfile |
@@ -144,8 +148,6 @@ From left to right, we show: (1) input crop, (2) raw DINOv2 base output, (3) Kme
 | CLIP + DVT        | 41.10 | 77.41 | 53.07 |[log](https://jiawei-yang.github.io/DenoisingViT/logs/dvt/vit_base_patch16_clip_384.laion2b_ft_in12k_in1k_ade20k.log)|
 | DINOv2            | 47.29 | 80.84 | 59.18 |[log](https://jiawei-yang.github.io/DenoisingViT/logs/baselines/vit_base_patch14_dinov2.lvd142m_ade20k.log)|
 | DINOv2 + DVT      | 48.66 | 81.89 | 60.24 |[log](https://jiawei-yang.github.io/DenoisingViT/logs/dvt/vit_base_patch14_dinov2.lvd142m_ade20k.log)|
-
-
 
 #### NYU-D Evaluation Results
 
