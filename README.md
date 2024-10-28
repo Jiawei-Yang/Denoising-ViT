@@ -100,7 +100,11 @@ pip uninstall mmcv-full -y && pip uninstall mmcv -y && pip cache purge
 MCV_WITH_OPS=1 FORCE_CUDA=1 pip install mmcv-full==1.5.0 mmsegmentation==0.27.0
 ```
 
-Download the checkpoints listed [here](#pre-trained-models) and put them under the `checkpoints` directory.
+### Pre-trained Models and Video Generation
+
+Please refer to [huggingface](https://huggingface.co/jjiaweiyang/DVT) for the pre-trained models.
+
+To generate demo videos similar to those in our website, you can simply run `python make_video_demo.py`
 
 ### Data preparation
 
