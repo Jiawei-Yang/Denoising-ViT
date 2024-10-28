@@ -158,9 +158,7 @@ class FeatureResize(object):
         scale_factor = np.array([w_scale, h_scale, w_scale, h_scale], dtype=np.float32)
         results["img"] = img
         results["img_shape"] = img.shape  # (518, 518)
-        results[
-            "pad_shape"
-        ] = img.shape  # (518, 518)  # in case that there is no padding
+        results["pad_shape"] = img.shape  # (518, 518)  # in case that there is no padding
         results["scale_factor"] = scale_factor
         # results["feature_scale_factor"] = scale_factor
         results["keep_ratio"] = self.keep_ratio
@@ -169,13 +167,9 @@ class FeatureResize(object):
         """Resize semantic segmentation map with ``results['scale']``."""
         for key in results.get("seg_fields", []):
             if self.keep_ratio:
-                gt_seg = mmcv.imrescale(
-                    results[key], results["scale"], interpolation="nearest"
-                )
+                gt_seg = mmcv.imrescale(results[key], results["scale"], interpolation="nearest")
             else:
-                gt_seg = mmcv.imresize(
-                    results[key], results["scale"], interpolation="nearest"
-                )
+                gt_seg = mmcv.imresize(results[key], results["scale"], interpolation="nearest")
             results[key] = gt_seg
 
     def __call__(self, results):

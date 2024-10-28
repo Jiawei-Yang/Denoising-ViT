@@ -21,9 +21,7 @@ class GradientLoss(nn.Module):
         max_depth (int): When filtering invalid gt, set a max threshold. Default: None.
     """
 
-    def __init__(
-        self, valid_mask=True, loss_weight=1.0, max_depth=None, loss_name="loss_grad"
-    ):
+    def __init__(self, valid_mask=True, loss_weight=1.0, max_depth=None, loss_name="loss_grad"):
         super(GradientLoss, self).__init__()
         self.valid_mask = valid_mask
         self.loss_weight = loss_weight

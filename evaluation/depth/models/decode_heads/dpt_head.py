@@ -157,9 +157,7 @@ class PreActResidualConvUnit(BaseModule):
         init_cfg (dict, optional): Initialization config dict. Default: None.
     """
 
-    def __init__(
-        self, in_channels, act_cfg, norm_cfg, stride=1, dilation=1, init_cfg=None
-    ):
+    def __init__(self, in_channels, act_cfg, norm_cfg, stride=1, dilation=1, init_cfg=None):
         super(PreActResidualConvUnit, self).__init__(init_cfg)
 
         self.conv1 = ConvModule(
@@ -277,7 +275,7 @@ class DPTHead(DepthBaseDecodeHead):
         readout_type="ignore",
         patch_size=16,
         expand_channels=False,
-        **kwargs
+        **kwargs,
     ):
         super(DPTHead, self).__init__(**kwargs)
 

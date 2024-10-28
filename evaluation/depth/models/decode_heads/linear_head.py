@@ -20,7 +20,7 @@ class BNHead(DepthBaseDecodeHead):
         input_transform="resize_concat",
         in_index=(0, 1, 2, 3),
         upsample=1,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.input_transform = input_transform
@@ -32,9 +32,7 @@ class BNHead(DepthBaseDecodeHead):
                 self.channels, self.n_bins, kernel_size=1, padding=0, stride=1
             )
         else:
-            self.conv_depth = nn.Conv2d(
-                self.channels, 1, kernel_size=1, padding=0, stride=1
-            )
+            self.conv_depth = nn.Conv2d(self.channels, 1, kernel_size=1, padding=0, stride=1)
 
     def _transform_inputs(self, inputs):
         """Transform inputs for decoder.

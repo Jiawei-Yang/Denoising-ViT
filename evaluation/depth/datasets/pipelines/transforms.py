@@ -40,9 +40,7 @@ class Normalize(object):
                 result dict.
         """
 
-        results["img"] = mmcv.imnormalize(
-            results["img"], self.mean, self.std, self.to_rgb
-        )
+        results["img"] = mmcv.imnormalize(results["img"], self.mean, self.std, self.to_rgb)
         results["img_norm_cfg"] = dict(mean=self.mean, std=self.std, to_rgb=self.to_rgb)
         return results
 
@@ -161,9 +159,7 @@ class RandomRotate(object):
             rotated image. Default: False
     """
 
-    def __init__(
-        self, prob, degree, pad_val=0, depth_pad_val=0, center=None, auto_bound=False
-    ):
+    def __init__(self, prob, degree, pad_val=0, depth_pad_val=0, center=None, auto_bound=False):
         self.prob = prob
         assert prob >= 0 and prob <= 1
         if isinstance(degree, (float, int)):
@@ -171,9 +167,7 @@ class RandomRotate(object):
             self.degree = (-degree, degree)
         else:
             self.degree = degree
-        assert len(self.degree) == 2, (
-            f"degree {self.degree} should be a " f"tuple of (min, max)"
-        )
+        assert len(self.degree) == 2, f"degree {self.degree} should be a " f"tuple of (min, max)"
         self.pal_val = pad_val
         self.depth_pad_val = depth_pad_val
         self.center = center
@@ -268,16 +262,12 @@ class RandomFlip(object):
             results["flip_direction"] = self.direction
         if results["flip"]:
             # flip image
-            results["img"] = mmcv.imflip(
-                results["img"], direction=results["flip_direction"]
-            )
+            results["img"] = mmcv.imflip(results["img"], direction=results["flip_direction"])
 
             # flip depth
             for key in results.get("depth_fields", []):
                 # use copy() to make numpy stride positive
-                results[key] = mmcv.imflip(
-                    results[key], direction=results["flip_direction"]
-                ).copy()
+                results[key] = mmcv.imflip(results[key], direction=results["flip_direction"]).copy()
 
         return results
 
@@ -390,15 +380,11 @@ class ColorAug(object):
             image_aug = image**gamma
 
             # brightness augmentation
-            brightness = np.random.uniform(
-                min(*self.brightness_range), max(*self.brightness_range)
-            )
+            brightness = np.random.uniform(min(*self.brightness_range), max(*self.brightness_range))
             image_aug = image_aug * brightness
 
             # color augmentation
-            colors = np.random.uniform(
-                min(*self.color_range), max(*self.color_range), size=3
-            )
+            colors = np.random.uniform(min(*self.color_range), max(*self.color_range), size=3)
             white = np.ones((image.shape[0], image.shape[1]))
             color_image = np.stack([white * colors[i] for i in range(3)], axis=2)
             image_aug *= color_image
@@ -447,9 +433,7 @@ class Resize(object):
             image. Default: True
     """
 
-    def __init__(
-        self, img_scale=None, multiscale_mode="range", ratio_range=None, keep_ratio=True
-    ):
+    def __init__(self, img_scale=None, multiscale_mode="range", ratio_range=None, keep_ratio=True):
         if img_scale is None:
             self.img_scale = None
         else:
@@ -562,9 +546,7 @@ class Resize(object):
                 h, w = results["img"].shape[:2]
                 scale, scale_idx = self.random_sample_ratio((w, h), self.ratio_range)
             else:
-                scale, scale_idx = self.random_sample_ratio(
-                    self.img_scale[0], self.ratio_range
-                )
+                scale, scale_idx = self.random_sample_ratio(self.img_scale[0], self.ratio_range)
         elif len(self.img_scale) == 1:
             scale, scale_idx = self.img_scale[0], 0
         elif self.multiscale_mode == "range":
@@ -580,9 +562,7 @@ class Resize(object):
     def _resize_img(self, results):
         """Resize images with ``results['scale']``."""
         if self.keep_ratio:
-            img, scale_factor = mmcv.imrescale(
-                results["img"], results["scale"], return_scale=True
-            )
+            img, scale_factor = mmcv.imrescale(results["img"], results["scale"], return_scale=True)
             # the w_scale and h_scale has minor difference
             # a real fix should be done in the mmcv.imrescale in the future
             new_h, new_w = img.shape[:2]
@@ -604,13 +584,9 @@ class Resize(object):
         """Resize depth estimation map with ``results['scale']``."""
         for key in results.get("depth_fields", []):
             if self.keep_ratio:
-                gt_depth = mmcv.imrescale(
-                    results[key], results["scale"], interpolation="nearest"
-                )
+                gt_depth = mmcv.imrescale(results[key], results["scale"], interpolation="nearest")
             else:
-                gt_depth = mmcv.imresize(
-                    results[key], results["scale"], interpolation="nearest"
-                )
+                gt_depth = mmcv.imresize(results[key], results["scale"], interpolation="nearest")
             results[key] = gt_depth
 
     def __call__(self, results):

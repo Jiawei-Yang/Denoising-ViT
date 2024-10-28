@@ -86,7 +86,6 @@ def eval_metrics(gt, pred, min_depth=1e-3, max_depth=80):
 
 
 def pre_eval_to_metrics(pre_eval_results):
-
     # convert list of tuples to tuple of lists, e.g.
     # [(A_1, B_1, C_1, D_1), ...,  (A_n, B_n, C_n, D_n)] to
     # ([A_1, ..., A_n], ..., [D_1, ..., D_n])

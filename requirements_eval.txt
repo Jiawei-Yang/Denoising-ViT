@@ -1,0 +1,24 @@
+--extra-index-url https://download.pytorch.org/whl/cu117
+torch==2.0.0
+torchvision==0.15.0
+
+einops
+
+# dev
+numpy==1.26.4
+black==22.6.0
+isort
+
+# custom
+matplotlib
+imageio
+imageio[ffmpeg]
+timm==1.0.7
+opencv-python
+scikit-image
+mmcv-full==1.5.0
+mmsegmentation==0.27.0
+
+# clustering
+torch_kmeans
+jaxtyping

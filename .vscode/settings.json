@@ -1,0 +1,25 @@
+{
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        100
+    ],
+    "files.exclude": {
+        "**/.git": true,
+        "**/__pycache__": true,
+        "**/venv": true
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "debug.focusWindowOnBreak": false,
+    "files.watcherExclude": {
+        "**/.git/**": true,
+        "**/checkpoints/**": true,
+        "**/data/**": true,
+        "**/work_dirs/**": true,
+        "**/work_dirs_eval/**": true,
+        "**/outputs/**": true,
+        "**/dataset_cache/**": true,
+        "**/data": true
+    }
+}

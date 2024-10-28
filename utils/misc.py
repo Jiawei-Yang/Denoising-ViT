@@ -79,9 +79,7 @@ def init_distributed_mode(args):
     torch.cuda.set_device(args.gpu)
     args.dist_backend = "nccl"
     print(
-        "| distributed init (rank {}): {}, gpu {}".format(
-            args.rank, args.dist_url, args.gpu
-        ),
+        "| distributed init (rank {}): {}, gpu {}".format(args.rank, args.dist_url, args.gpu),
         flush=True,
     )
     dist.init_process_group(
@@ -302,9 +300,7 @@ def get_grad_norm_(parameters, norm_type: float = 2.0) -> torch.Tensor:
         total_norm = max(p.grad.detach().abs().max().to(device) for p in parameters)
     else:
         total_norm = torch.norm(
-            torch.stack(
-                [torch.norm(p.grad.detach(), norm_type).to(device) for p in parameters]
-            ),
+            torch.stack([torch.norm(p.grad.detach(), norm_type).to(device) for p in parameters]),
             norm_type,
         )
     return total_norm
@@ -317,11 +313,7 @@ def adjust_learning_rate(optimizer, epoch, args):
     else:
         lr = args.min_lr + (args.lr - args.min_lr) * 0.5 * (
             1.0
-            + math.cos(
-                math.pi
-                * (epoch - args.warmup_epochs)
-                / (args.epochs - args.warmup_epochs)
-            )
+            + math.cos(math.pi * (epoch - args.warmup_epochs) / (args.epochs - args.warmup_epochs))
         )
     for param_group in optimizer.param_groups:
         if "lr_scale" in param_group:

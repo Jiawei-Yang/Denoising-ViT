@@ -64,14 +64,10 @@ class LoadFeaturesFromFile(object):
 
         # a bit of a hack, but we need to get the shape of the image
         if self.ori_shape is None:
-            seg_filename = osp.join(
-                results["seg_prefix"], results["img_info"]["ann"]["seg_map"]
-            )
+            seg_filename = osp.join(results["seg_prefix"], results["img_info"]["ann"]["seg_map"])
             img_bytes = self.file_client.get(seg_filename)
             gt_semantic_seg = (
-                mmcv.imfrombytes(
-                    img_bytes, flag="unchanged", backend=self.imdecode_backend
-                )
+                mmcv.imfrombytes(img_bytes, flag="unchanged", backend=self.imdecode_backend)
                 .squeeze()
                 .astype(np.uint8)
             )

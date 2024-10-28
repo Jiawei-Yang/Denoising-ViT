@@ -98,9 +98,7 @@ class DepthBaseDecodeHead(BaseModule, metaclass=ABCMeta):
             self.bins_strategy = bins_strategy
             self.norm_strategy = norm_strategy
             self.softmax = nn.Softmax(dim=1)
-            self.conv_depth = nn.Conv2d(
-                channels, n_bins, kernel_size=3, padding=1, stride=1
-            )
+            self.conv_depth = nn.Conv2d(channels, n_bins, kernel_size=3, padding=1, stride=1)
         else:
             self.conv_depth = nn.Conv2d(channels, 1, kernel_size=3, padding=1, stride=1)
 

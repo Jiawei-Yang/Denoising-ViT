@@ -68,9 +68,7 @@ class BNHead(BaseDecodeHead):
                     len(inputs),
                 )
                 inputs = [
-                    resize(
-                        input=x, scale_factor=f, mode="bilinear" if f >= 1 else "area"
-                    )
+                    resize(input=x, scale_factor=f, mode="bilinear" if f >= 1 else "area")
                     for x, f in zip(inputs, self.resize_factors)
                 ]
                 # print("after", *(x.shape for x in inputs))

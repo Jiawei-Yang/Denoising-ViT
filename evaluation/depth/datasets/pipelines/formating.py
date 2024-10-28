@@ -132,9 +132,7 @@ class DefaultFormatBundle(object):
             results["img"] = DC(to_tensor(img), stack=True)
         if "depth_gt" in results:
             # unsqueeze here
-            results["depth_gt"] = DC(
-                to_tensor(results["depth_gt"][None, ...]), stack=True
-            )
+            results["depth_gt"] = DC(to_tensor(results["depth_gt"][None, ...]), stack=True)
         return results
 
     def __repr__(self):
@@ -220,9 +218,7 @@ class Collect(object):
         return data
 
     def __repr__(self):
-        return (
-            self.__class__.__name__ + f"(keys={self.keys}, meta_keys={self.meta_keys})"
-        )
+        return self.__class__.__name__ + f"(keys={self.keys}, meta_keys={self.meta_keys})"
 
 
 @PIPELINES.register_module()
@@ -237,9 +233,7 @@ class ToDataContainer(object):
             dict(key='gt_semantic_seg'))``.
     """
 
-    def __init__(
-        self, fields=(dict(key="img", stack=True), dict(key="gt_semantic_seg"))
-    ):
+    def __init__(self, fields=(dict(key="img", stack=True), dict(key="gt_semantic_seg"))):
         self.fields = fields
 
     def __call__(self, results):

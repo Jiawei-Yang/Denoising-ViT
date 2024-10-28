@@ -106,9 +106,7 @@ class MetricLogger(object):
             return self.meters[attr]
         if attr in self.__dict__:
             return self.__dict__[attr]
-        raise AttributeError(
-            "'{}' object has no attribute '{}'".format(type(self).__name__, attr)
-        )
+        raise AttributeError("'{}' object has no attribute '{}'".format(type(self).__name__, attr))
 
     def __str__(self):
         loss_str = []
@@ -136,9 +134,7 @@ class MetricLogger(object):
             f.write(json.dumps(dict_to_dump) + "\n")
         pass
 
-    def log_every(
-        self, iterable, print_freq, header=None, n_iterations=None, start_iteration=0
-    ):
+    def log_every(self, iterable, print_freq, header=None, n_iterations=None, start_iteration=0):
         i = start_iteration
         if not header:
             header = ""
@@ -269,9 +265,7 @@ def _configure_logger(
             if time_string is None:
                 filename = os.path.join(output, "logs", "log.txt")
             else:
-                filename = os.path.join(
-                    output, "logs", "log_{}.txt".format(time_string)
-                )
+                filename = os.path.join(output, "logs", "log_{}.txt".format(time_string))
 
         if not is_main_process():
             global_rank = get_global_rank()

@@ -69,9 +69,7 @@ def build_dataset(cfg, default_args=None):
     if isinstance(cfg, (list, tuple)):
         dataset = ConcatDataset([build_dataset(c, default_args) for c in cfg])
     elif cfg["type"] == "RepeatDataset":
-        dataset = RepeatDataset(
-            build_dataset(cfg["dataset"], default_args), cfg["times"]
-        )
+        dataset = RepeatDataset(build_dataset(cfg["dataset"], default_args), cfg["times"])
     elif isinstance(cfg.get("img_dir"), (list, tuple)) or isinstance(
         cfg.get("split", None), (list, tuple)
     ):
@@ -93,7 +91,7 @@ def build_dataloader(
     drop_last=False,
     pin_memory=True,
     persistent_workers=True,
-    **kwargs
+    **kwargs,
 ):
     """Build PyTorch DataLoader.
 
@@ -154,7 +152,7 @@ def build_dataloader(
             worker_init_fn=init_fn,
             drop_last=drop_last,
             persistent_workers=persistent_workers,
-            **kwargs
+            **kwargs,
         )
     else:
         data_loader = DataLoader(
@@ -167,7 +165,7 @@ def build_dataloader(
             shuffle=shuffle,
             worker_init_fn=init_fn,
             drop_last=drop_last,
-            **kwargs
+            **kwargs,
         )
 
     return data_loader

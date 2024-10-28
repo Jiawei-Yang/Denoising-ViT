@@ -75,8 +75,7 @@ class BaseDepther(BaseModule, metaclass=ABCMeta):
         num_augs = len(imgs)
         if num_augs != len(img_metas):
             raise ValueError(
-                f"num of augmentations ({len(imgs)}) != "
-                f"num of image meta ({len(img_metas)})"
+                f"num of augmentations ({len(imgs)}) != " f"num of image meta ({len(img_metas)})"
             )
 
         if not isinstance(img_metas[0], list):

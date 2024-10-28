@@ -51,9 +51,7 @@ class DepthLoadAnnotations(object):
             'pillow'
     """
 
-    def __init__(
-        self, file_client_args=dict(backend="disk"), imdecode_backend="pillow"
-    ):
+    def __init__(self, file_client_args=dict(backend="disk"), imdecode_backend="pillow"):
         self.file_client_args = file_client_args.copy()
         self.file_client = None
         self.imdecode_backend = imdecode_backend
@@ -72,15 +70,11 @@ class DepthLoadAnnotations(object):
             self.file_client = mmcv.FileClient(**self.file_client_args)
 
         if results.get("depth_prefix", None) is not None:
-            filename = osp.join(
-                results["depth_prefix"], results["ann_info"]["depth_map"]
-            )
+            filename = osp.join(results["depth_prefix"], results["ann_info"]["depth_map"])
         else:
             filename = results["ann_info"]["depth_map"]
 
-        depth_gt = (
-            np.asarray(Image.open(filename), dtype=np.float32) / results["depth_scale"]
-        )
+        depth_gt = np.asarray(Image.open(filename), dtype=np.float32) / results["depth_scale"]
 
         results["depth_gt"] = depth_gt
         results["depth_ori_shape"] = depth_gt.shape
@@ -107,9 +101,7 @@ class DisparityLoadAnnotations(object):
             'pillow'
     """
 
-    def __init__(
-        self, file_client_args=dict(backend="disk"), imdecode_backend="pillow"
-    ):
+    def __init__(self, file_client_args=dict(backend="disk"), imdecode_backend="pillow"):
         self.file_client_args = file_client_args.copy()
         self.file_client = None
         self.imdecode_backend = imdecode_backend
@@ -128,16 +120,12 @@ class DisparityLoadAnnotations(object):
             self.file_client = mmcv.FileClient(**self.file_client_args)
 
         if results.get("depth_prefix", None) is not None:
-            filename = osp.join(
-                results["depth_prefix"], results["ann_info"]["depth_map"]
-            )
+            filename = osp.join(results["depth_prefix"], results["ann_info"]["depth_map"])
         else:
             filename = results["ann_info"]["depth_map"]
 
         if results.get("camera_prefix", None) is not None:
-            camera_filename = osp.join(
-                results["camera_prefix"], results["cam_info"]["cam_info"]
-            )
+            camera_filename = osp.join(results["camera_prefix"], results["cam_info"]["cam_info"])
         else:
             camera_filename = results["cam_info"]["cam_info"]
 
@@ -146,9 +134,9 @@ class DisparityLoadAnnotations(object):
         baseline = camera["extrinsic"]["baseline"]
         focal_length = camera["intrinsic"]["fx"]
 
-        disparity = (
-            np.asarray(Image.open(filename), dtype=np.float32) - 1.0
-        ) / results["depth_scale"]
+        disparity = (np.asarray(Image.open(filename), dtype=np.float32) - 1.0) / results[
+            "depth_scale"
+        ]
         NaN = disparity <= 0
 
         disparity[NaN] = 1
@@ -220,9 +208,7 @@ class LoadImageFromFile(object):
         else:
             filename = results["img_info"]["filename"]
         img_bytes = self.file_client.get(filename)
-        img = mmcv.imfrombytes(
-            img_bytes, flag=self.color_type, backend=self.imdecode_backend
-        )
+        img = mmcv.imfrombytes(img_bytes, flag=self.color_type, backend=self.imdecode_backend)
         if self.to_float32:
             img = img.astype(np.float32)
 

@@ -25,9 +25,7 @@ def np2tmp(array, temp_file_name=None, tmpdir=None):
     """
 
     if temp_file_name is None:
-        temp_file_name = tempfile.NamedTemporaryFile(
-            suffix=".npy", delete=False, dir=tmpdir
-        ).name
+        temp_file_name = tempfile.NamedTemporaryFile(suffix=".npy", delete=False, dir=tmpdir).name
     np.save(temp_file_name, array)
     return temp_file_name
 
@@ -94,9 +92,7 @@ def single_gpu_test(
             result_depth = model(return_loss=False, **data)
 
         if format_only:
-            result = dataset.format_results(
-                result_depth, indices=batch_indices, **format_args
-            )
+            result = dataset.format_results(result_depth, indices=batch_indices, **format_args)
         if pre_eval:
             # TODO: adapt samples_per_gpu > 1.
             # only samples_per_gpu=1 valid now
@@ -127,9 +123,7 @@ def single_gpu_test(
                         filename = filename + ".npy"
                         out_file = osp.join(out_dir, filename)
                     else:
-                        out_file = osp.join(
-                            out_dir, replace_str(img_meta["ori_filename"])
-                        )
+                        out_file = osp.join(out_dir, replace_str(img_meta["ori_filename"]))
                 else:
                     out_file = None
 
@@ -215,9 +209,7 @@ def multi_gpu_test(
             result = model(return_loss=False, rescale=True, **data)
 
         if format_only:
-            result = dataset.format_results(
-                result, indices=batch_indices, **format_args
-            )
+            result = dataset.format_results(result, indices=batch_indices, **format_args)
 
         if pre_eval:
             # TODO: adapt samples_per_gpu > 1.

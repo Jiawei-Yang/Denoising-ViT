@@ -26,8 +26,7 @@ def init_depther(config, checkpoint=None, device="cuda:0"):
         config = mmcv.Config.fromfile(config)
     elif not isinstance(config, mmcv.Config):
         raise TypeError(
-            "config must be a filename or Config object, "
-            "but got {}".format(type(config))
+            "config must be a filename or Config object, " "but got {}".format(type(config))
         )
     config.model.pretrained = None
     config.model.train_cfg = None

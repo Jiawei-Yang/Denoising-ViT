@@ -58,7 +58,6 @@ class CustomDepthDataset(Dataset):
         max_depth=10,
         depth_scale=1,
     ):
-
         self.pipeline = Compose(pipeline)
         self.img_path = os.path.join(data_root, "rgb")
         self.depth_path = os.path.join(data_root, "depth")
@@ -98,7 +97,6 @@ class CustomDepthDataset(Dataset):
                 img_infos.append(img_info)
 
         else:
-
             for img in imgs:
                 img_info = dict()
                 img_info["filename"] = img

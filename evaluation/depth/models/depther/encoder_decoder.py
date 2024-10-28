@@ -83,18 +83,14 @@ class DepthEncoderDecoder(BaseDepther):
         x = self.extract_feat(img)
         out = self._decode_head_forward_test(x, img_metas)
         # crop the pred depth to the certain range.
-        out = torch.clamp(
-            out, min=self.decode_head.min_depth, max=self.decode_head.max_depth
-        )
+        out = torch.clamp(out, min=self.decode_head.min_depth, max=self.decode_head.max_depth)
         if rescale:
             if size is None:
                 if img_metas is not None:
                     size = img_metas[0]["ori_shape"][:2]
                 else:
                     size = img.shape[2:]
-            out = resize(
-                input=out, size=size, mode="bilinear", align_corners=self.align_corners
-            )
+            out = resize(input=out, size=size, mode="bilinear", align_corners=self.align_corners)
         return out
 
     def _decode_head_forward_train(self, img, x, img_metas, depth_gt, **kwargs):
@@ -141,9 +137,7 @@ class DepthEncoderDecoder(BaseDepther):
         losses = dict()
 
         # the last of x saves the info from neck
-        loss_decode = self._decode_head_forward_train(
-            img, x, img_metas, depth_gt, **kwargs
-        )
+        loss_decode = self._decode_head_forward_train(img, x, img_metas, depth_gt, **kwargs)
 
         losses.update(loss_decode)
 
@@ -193,9 +187,7 @@ class DepthEncoderDecoder(BaseDepther):
         assert (count_mat == 0).sum() == 0
         if torch.onnx.is_in_onnx_export():
             # cast count_mat to constant while exporting to ONNX
-            count_mat = torch.from_numpy(count_mat.cpu().detach().numpy()).to(
-                device=img.device
-            )
+            count_mat = torch.from_numpy(count_mat.cpu().detach().numpy()).to(device=img.device)
         preds = preds / count_mat
         return preds
 

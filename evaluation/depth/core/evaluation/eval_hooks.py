@@ -45,9 +45,7 @@ class EvalHook(_EvalHook):
 
         from evaluation.depth.apis import single_gpu_test
 
-        results = single_gpu_test(
-            runner.model, self.dataloader, show=False, pre_eval=self.pre_eval
-        )
+        results = single_gpu_test(runner.model, self.dataloader, show=False, pre_eval=self.pre_eval)
         runner.log_buffer.clear()
         runner.log_buffer.output["eval_iter_num"] = len(self.dataloader)
         key_score = self.evaluate(runner, results)

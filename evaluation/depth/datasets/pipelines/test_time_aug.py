@@ -71,8 +71,7 @@ class MultiScaleFlipAug(object):
             assert len(img_scale) == 2
             # mode 2: given a scale and a range of image ratio
             self.img_scale = [
-                (int(img_scale[0] * ratio), int(img_scale[1] * ratio))
-                for ratio in img_ratios
+                (int(img_scale[0] * ratio), int(img_scale[1] * ratio)) for ratio in img_ratios
             ]
         else:
             # mode 3: given multiple scales

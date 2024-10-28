@@ -16,15 +16,7 @@ from .loading import (
     LoadKITTICamIntrinsic,
 )
 from .test_time_aug import MultiScaleFlipAug
-from .transforms import (
-    KBCrop,
-    Normalize,
-    NYUCrop,
-    RandomCrop,
-    RandomFlip,
-    RandomRotate,
-    Resize,
-)
+from .transforms import KBCrop, Normalize, NYUCrop, RandomCrop, RandomFlip, RandomRotate, Resize
 
 __all__ = [
     "Compose",

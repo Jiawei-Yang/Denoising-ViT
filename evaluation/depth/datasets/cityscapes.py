@@ -77,7 +77,6 @@ class CSDataset(Dataset):
         min_depth=1e-3,
         max_depth=80,
     ):
-
         self.pipeline = Compose(pipeline)
         self.img_dir = img_dir
         self.cam_dir = cam_dir
@@ -103,9 +102,7 @@ class CSDataset(Dataset):
                 self.cam_dir = osp.join(self.data_root, self.cam_dir)
 
         # load annotations
-        self.img_infos = self.load_annotations(
-            self.img_dir, self.ann_dir, self.split, self.cam_dir
-        )
+        self.img_infos = self.load_annotations(self.img_dir, self.ann_dir, self.split, self.cam_dir)
 
     def __len__(self):
         """Total number of samples of data."""
@@ -263,18 +260,14 @@ class CSDataset(Dataset):
         width = depth_gt.shape[1]
         top_margin = int(height - 352)
         left_margin = int((width - 1216) / 2)
-        depth_cropped = depth_gt[
-            top_margin : top_margin + 352, left_margin : left_margin + 1216
-        ]
+        depth_cropped = depth_gt[top_margin : top_margin + 352, left_margin : left_margin + 1216]
         depth_cropped = np.expand_dims(depth_cropped, axis=0)
         return depth_cropped
 
     def eval_mask(self, depth_gt):
         """Following Adabins, Do grag_crop or eigen_crop for testing"""
         depth_gt = np.squeeze(depth_gt)
-        valid_mask = np.logical_and(
-            depth_gt > self.min_depth, depth_gt < self.max_depth
-        )
+        valid_mask = np.logical_and(depth_gt > self.min_depth, depth_gt < self.max_depth)
         if self.garg_crop or self.eigen_crop:
             gt_height, gt_width = depth_gt.shape
             eval_mask = np.zeros(valid_mask.shape)
@@ -314,13 +307,9 @@ class CSDataset(Dataset):
         pre_eval_preds = []
 
         for i, (pred, index) in enumerate(zip(preds, indices)):
-            depth_map = osp.join(
-                self.ann_dir, self.img_infos[index]["ann"]["depth_map"]
-            )
+            depth_map = osp.join(self.ann_dir, self.img_infos[index]["ann"]["depth_map"])
 
-            cam_info = osp.join(
-                self.cam_dir, self.img_infos[index]["camera"]["cam_info"]
-            )
+            cam_info = osp.join(self.cam_dir, self.img_infos[index]["camera"]["cam_info"])
 
             with open(cam_info) as f:
                 camera = json.load(f)

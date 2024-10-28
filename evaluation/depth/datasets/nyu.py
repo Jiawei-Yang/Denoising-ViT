@@ -71,7 +71,6 @@ class NYUDataset(Dataset):
         min_depth=1e-3,
         max_depth=10,
     ):
-
         self.pipeline = Compose(pipeline)
         self.split = split
         self.data_root = data_root
@@ -118,9 +117,7 @@ class NYUDataset(Dataset):
                         depth_map=osp.join(data_root, remove_leading_slash(depth_map))
                     )
                     img_name = line.strip().split(" ")[0]
-                    img_info["filename"] = osp.join(
-                        data_root, remove_leading_slash(img_name)
-                    )
+                    img_info["filename"] = osp.join(data_root, remove_leading_slash(img_name))
                     img_infos.append(img_info)
         else:
             raise NotImplementedError
@@ -207,16 +204,12 @@ class NYUDataset(Dataset):
 
         for img_info in self.img_infos:
             depth_map = img_info["ann"]["depth_map"]
-            depth_map_gt = (
-                np.asarray(Image.open(depth_map), dtype=np.float32) / self.depth_scale
-            )
+            depth_map_gt = np.asarray(Image.open(depth_map), dtype=np.float32) / self.depth_scale
             yield depth_map_gt
 
     def eval_mask(self, depth_gt):
         depth_gt = np.squeeze(depth_gt)
-        valid_mask = np.logical_and(
-            depth_gt > self.min_depth, depth_gt < self.max_depth
-        )
+        valid_mask = np.logical_and(depth_gt > self.min_depth, depth_gt < self.max_depth)
         if self.garg_crop or self.eigen_crop:
             gt_height, gt_width = depth_gt.shape
             eval_mask = np.zeros(valid_mask.shape)
@@ -257,9 +250,7 @@ class NYUDataset(Dataset):
         for i, (pred, index) in enumerate(zip(preds, indices)):
             depth_map = self.img_infos[index]["ann"]["depth_map"]
 
-            depth_map_gt = (
-                np.asarray(Image.open(depth_map), dtype=np.float32) / self.depth_scale
-            )
+            depth_map_gt = np.asarray(Image.open(depth_map), dtype=np.float32) / self.depth_scale
             depth_map_gt = np.expand_dims(depth_map_gt, axis=0)
             # depth_map_gt = self.eval_nyu_crop(depth_map_gt)
             valid_mask = self.eval_mask(depth_map_gt)

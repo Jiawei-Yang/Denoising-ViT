@@ -82,9 +82,7 @@ def get_scale_map(
     """
     if scalar_map.shape[0] != 1:
         scalar_map = scalar_map[None]
-    scalar_map = (scalar_map - scalar_map.min()) / (
-        scalar_map.max() - scalar_map.min() + 1e-6
-    )
+    scalar_map = (scalar_map - scalar_map.min()) / (scalar_map.max() - scalar_map.min() + 1e-6)
     scalar_map = F.interpolate(
         scalar_map.permute(0, 3, 1, 2),
         size=img_size,
@@ -151,13 +149,9 @@ def get_cluster_map(
     if feature_map.shape[0] != 1:
         # make it (1, h, w, C)
         feature_map = feature_map[None]
-    labels = kmeans.fit_predict(
-        feature_map.reshape(1, -1, feature_map.shape[-1])
-    ).float()
+    labels = kmeans.fit_predict(feature_map.reshape(1, -1, feature_map.shape[-1])).float()
     labels = (
-        F.interpolate(
-            labels.reshape(1, *feature_map.shape[:-1]), size=img_size, mode="nearest"
-        )
+        F.interpolate(labels.reshape(1, *feature_map.shape[:-1]), size=img_size, mode="nearest")
         .squeeze()
         .cpu()
         .numpy()

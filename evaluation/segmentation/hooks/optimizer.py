@@ -36,9 +36,7 @@ class DistOptimizerHook(OptimizerHook):
         runner.outputs["loss"] /= self.update_interval
         if self.use_fp16:
             # runner.outputs['loss'].backward()
-            with apex.amp.scale_loss(
-                runner.outputs["loss"], runner.optimizer
-            ) as scaled_loss:
+            with apex.amp.scale_loss(runner.outputs["loss"], runner.optimizer) as scaled_loss:
                 scaled_loss.backward()
         else:
             runner.outputs["loss"].backward()
