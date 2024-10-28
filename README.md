@@ -15,7 +15,7 @@
 &dagger;project lead&emsp;*equal technical contribution contribution
 
 <a href="https://arxiv.org/abs/2401.02957"><img src='https://img.shields.io/badge/arXiv-DVT -red' alt='Paper PDF'></a>
-<a href='https://denoising-vit-v2.github.io'><img src='https://img.shields.io/badge/Project_Page-DVT-blue' alt='Project Page'></a>
+<a href='https://jiawei-yang.github.io/DenoisingViT/'><img src='https://img.shields.io/badge/Project_Page-DVT-blue' alt='Project Page'></a>
 <a href='https://huggingface.co/jjiaweiyang/DVT'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Pretrained Model-green'></a>
 </div>
 
