@@ -1,10 +1,10 @@
 <div align="center">
 <h1>Denoising Vision Transformers</h1>
 
-[**Jiawei Yang**](https://jiawei-yang.github.io/)<sup>1</sup> · [**Katie Z Luo**](https://www.cs.cornell.edu/~katieluo/)<sup>2&dagger;</sup> · [**Jiefeng Li**](https://jeffli.site/)<sup>2</sup> · [**Congyue Deng**](https://cs.stanford.edu/~congyue/)<sup>2</sup>
+[**Jiawei Yang**](https://jiawei-yang.github.io/)<sup>1&dagger;*</sup> · [**Katie Z Luo**](https://www.cs.cornell.edu/~katieluo/)<sup>2&dagger;</sup> · [**Jiefeng Li**](https://jeffli.site/)<sup>3</sup> · [**Congyue Deng**](https://cs.stanford.edu/~congyue/)<sup>4</sup>
 <br>
-[**Leonidas Guibas**](https://geometry.stanford.edu/member/guibas/) · [**Dilip Krishnan**](https://dilipkay.wordpress.com/) · [**Kilian Q. Weinberger**](https://www.cs.cornell.edu/~kilian/)<sup>2</sup><br>
-[**Yonglong Tian**](https://people.csail.mit.edu/yonglong/)<sup>1*</sup> · [**Yue Wang**](https://yuewang.xyz/)<sup>1*</sup>
+[**Leonidas Guibas**](https://geometry.stanford.edu/member/guibas/)<sup>4</sup> · [**Dilip Krishnan**](https://dilipkay.wordpress.com/)<sup>5</sup> · [**Kilian Q. Weinberger**](https://www.cs.cornell.edu/~kilian/)<sup>2</sup><br>
+[**Yonglong Tian**](https://people.csail.mit.edu/yonglong/)<sup>5</sup> · [**Yue Wang**](https://yuewang.xyz/)<sup>1</sup>
 
 <sup>1</sup>University of Southern California&emsp;&emsp;&emsp;<sup>2</sup>Cornell University
 <br>
